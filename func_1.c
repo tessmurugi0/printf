@@ -1,3 +1,4 @@
+#include <main.h>
 /************************* PRINT UNSIGNED NUMBER *************************/
 /**
  * print_unsigned - Prints an unsigned number
@@ -155,5 +156,5 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 
 	i++;
 
-	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
+	return (print_unsigned(0, i, buffer, flags, width, precision, size));
 }
