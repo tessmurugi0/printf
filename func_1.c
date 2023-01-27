@@ -1,4 +1,4 @@
-#include <strarg.h>
+#include <stdarg.h>
 
 /************************* PRINT UNSIGNED NUMBER *************************/
 /**
