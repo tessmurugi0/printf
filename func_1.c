@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-#include "main.h"
-
->>>>>>> 89039ba536db3ac31514f1295aaee0518e2cb9ce
-/************************* PRINT UNSIGNED NUMBER *************************/
-=======
 #include "main.h"
 
 /************************* PRINT CHAR *************************/
 
->>>>>>> 651a9fd0802532fa4f45765a0f0e800e850731c7
 /**
  * print_char - Prints a char
  * @types: List a of arguments
@@ -191,12 +184,6 @@ int print_binary(va_list types, char buffer[],
 			count++;
 		}
 	}
-<<<<<<< HEAD
 
-	i++;
-
-	return (print_unsigned(0, i, buffer, flags, width, precision, size));
-=======
 	return (count);
->>>>>>> 651a9fd0802532fa4f45765a0f0e800e850731c7
 }
