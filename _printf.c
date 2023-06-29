@@ -1,44 +1,51 @@
 #include "main.h"
 /**
- * _printf - print everything
- * @format: specifiers for data types
- * Return: int
+ * _printf - is a function that selects the correct function to print.
+ * @format: identifier to look for.
+ * Return: the length of the string.
  */
-int _printf(const char *format, ...)
+int _printf(const char * const format, ...)
 {
-	int (*print_f)(va_list, flags_f *);
-	const char *c;
-
+	convert_match m[] = {
+		{"%s", printf_string},
+		{"%c", printf_char},
+		{"%%", printf_37},
+		{"%i", printf_int},
+		{"%d", printf_dec},
+		{"%r", printf_srev},
+		{"%R", printf_rot13},
+		{"%b", printf_bin},
+		{"%u", printf_unsigned},
+		{"%o", printf_oct},
+		{"%x", printf_hex},
+		{"%X", printf_HEX},
+		{"%S", printf_exclusive_string},
+		{"%p", printf_pointer}
+	};
 	va_list args;
-	flags_f flags = {0, 0, 0};
-	int count = 0;
-
+	int i = 0, j, len = 0;
 	va_start(args, format);
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-	for (c = format; *c; c++)
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1); 
+
+Here:
+	while (format[i] != '\0')
 	{
-		if (*c == '%')
+		j = 13;
+		while (j >= 0)
 		{
-			c++;
-			if (*c == '%')
+			if (m[j].id[0] == format[i] && m[j].id[1] == format[i + 1])
 			{
-				count += _putchar('%');
-				continue;
+				len += m[j].f(args);
+				i = i + 2;
+				goto Here;
 			}
-			while (get_flag(*c, &flags))
-				c++;
-			print_f = get_print(*c);
-			count += (print_f)
-				? print_f(args, &flags)
-				: _printf("%%%c", *c);
+			j--;
 		}
-		else
-			count += _putchar(*c);
+		_putchar(format[i]);
+		len++;
+		i++;
 	}
-	_putchar(-1);
 	va_end(args);
-	return (count);
+	return (len);
 }
